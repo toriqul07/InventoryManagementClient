@@ -1,0 +1,9 @@
+.dashboard-container {
+  padding: 20px;
+}
+
+ngx-charts-bar-vertical,
+ngx-charts-pie-chart {
+  display: block;
+  margin: auto;
+}

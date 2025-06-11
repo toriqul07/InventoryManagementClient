@@ -1,0 +1,39 @@
+<div class="container py-4">
+  <!-- Message Display -->
+  <p *ngIf="message" class="alert alert-info text-center">{{ message }}</p>
+
+  <!-- Supplier Header -->
+  <div class="d-flex align-items-center justify-content-between flex-wrap mb-4">
+    <h1 class="text-info">Supplier</h1>
+    <div class="mt-3 mt-md-0">
+      <button class="btn btn-info" (click)="navigateToAddSupplierPage()">Add Supplier</button>
+    </div>
+  </div>
+
+  <!-- Supplier List -->
+  <ul class="list-unstyled mt-5" *ngIf="suppliers.length > 0">
+    <li
+      *ngFor="let supplier of suppliers"
+      class="d-flex justify-content-between align-items-center bg-light border rounded p-3 mb-3"
+      [attr.key]="supplier.id"
+    >
+      <span class="fw-semibold text-dark fs-5">{{ supplier.name }}</span>
+
+      <div>
+        <button
+          class="btn btn-sm btn-info me-2"
+          (click)="navigateToEditSupplierPage(supplier.id)"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="handleDeleteSupplier(supplier.id)"
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+
