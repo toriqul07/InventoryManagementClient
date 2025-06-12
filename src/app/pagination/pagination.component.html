@@ -1,1 +1,42 @@
-<p>pagination works!</p>
+<div class="d-flex justify-content-center mt-4 gap-2 flex-wrap">
+  <!-- PREVIOUS BUTTON -->
+  <button
+    class="btn btn-sm px-3"
+    [ngClass]="{
+      'btn-secondary': currentPage !== 1,
+      'btn-light': currentPage === 1
+    }"
+    [disabled]="currentPage === 1"
+    (click)="onPageChange(currentPage - 1)"
+  >
+    &laquo; Prev
+  </button>
+
+  <!-- PAGE NUMBER BUTTONS -->
+  <ng-container *ngFor="let number of pageNumbers">
+    <button
+      class="btn btn-sm px-3"
+      [ngClass]="{
+        'btn-info text-white fw-bold': currentPage === number,
+        'btn-outline-secondary': currentPage !== number
+      }"
+      (click)="onPageChange(number)"
+    >
+      {{ number }}
+    </button>
+  </ng-container>
+
+  <!-- NEXT BUTTON -->
+  <button
+    class="btn btn-sm px-3"
+    [ngClass]="{
+      'btn-secondary': currentPage !== totalPages,
+      'btn-light': currentPage === totalPages
+    }"
+    [disabled]="currentPage === totalPages"
+    (click)="onPageChange(currentPage + 1)"
+  >
+    Next &raquo;
+  </button>
+</div>
+

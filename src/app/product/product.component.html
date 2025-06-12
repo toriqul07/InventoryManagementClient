@@ -1,1 +1,47 @@
-<p>product works!</p>
+<div class="container py-4 bg-light">
+  <p class="alert alert-info text-center" *ngIf="message">{{ message }}</p>
+
+  <!-- PRODUCT HEADER -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-info fw-bold">Products</h1>
+    <button class="btn btn-info text-white" (click)="navigateToAddProductPage()">
+      Add Product
+    </button>
+  </div>
+
+  <!-- PRODUCT LIST -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3" *ngIf="products.length > 0">
+    <div class="col" *ngFor="let product of products">
+      <div class="card h-100 shadow-sm border-0">
+        <img
+          [src]="product.imageUrl"
+          [alt]="product.name"
+          class="card-img-top"
+          style="height: 130px; object-fit: cover;"
+        />
+        <div class="card-body text-center">
+          <h5 class="card-title text-dark fw-bold">{{ product.name }}</h5>
+          <p class="text-muted mb-1">SKU: {{ product.sku }}</p>
+          <p class="text-muted mb-1">Price: {{ product.price }}</p>
+          <p class="text-muted">Stock: {{ product.stockQuantity }}</p>
+        </div>
+        <div class="card-footer bg-white d-flex justify-content-center gap-2">
+          <button class="btn btn-sm btn-info text-white" (click)="navigateToEditProductPage(product.id)">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="handleProductDelete(product.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGINATION COMPONENT -->
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+    class="mt-4"
+  ></app-pagination>
+</div>

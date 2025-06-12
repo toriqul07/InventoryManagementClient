@@ -1,1 +1,46 @@
-<p>add-edit-supplier works!</p>
+<div class="container mt-5 p-4 shadow-sm rounded" style="max-width: 600px;">
+  <!-- Message -->
+  <p *ngIf="message" class="alert alert-info text-center">{{ message }}</p>
+
+  <!-- Form Heading -->
+  <h1 class="text-center text-primary mb-4">
+    {{ isEditing ? "Edit Supplier" : "Add Supplier" }}
+  </h1>
+
+  <!-- Form -->
+  <form (ngSubmit)="handleSubmit()">
+    <div class="mb-3">
+      <label class="form-label fw-bold text-secondary">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="formData.name"
+        name="name"
+        placeholder="Enter supplier name"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold text-secondary">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="formData.address"
+        name="address"
+        placeholder="Enter supplier address"
+        required
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="btn w-100 text-white"
+      style="background-color: #008080; border-color: #008080;"
+      onmouseover="this.style.backgroundColor='#2F4F4F'"
+      onmouseout="this.style.backgroundColor='#008080'"
+    >
+      {{ isEditing ? "Edit Supplier" : "Add Supplier" }}
+    </button>
+  </form>
+</div>
