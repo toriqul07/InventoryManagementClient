@@ -1,1 +1,58 @@
-<p>transaction works!</p>
+<div class="container py-4">
+  <p *ngIf="message" class="alert alert-info text-center">{{ message }}</p>
+
+  <!-- TRANSACTIONS HEADER -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <h1 class="text-info m-0">Transactions</h1>
+
+    <div class="input-group" style="max-width: 300px;">
+      <input
+        type="text"
+        [(ngModel)]="searchInput"
+        placeholder="Search transactions..."
+        class="form-control border-info"
+      />
+      <button class="btn btn-info" (click)="handleSearch()">Search</button>
+    </div>
+  </div>
+
+  <!-- TRANSACTIONS TABLE -->
+  <div *ngIf="transactions.length > 0" class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-nowrap">
+      <thead class="table-light">
+        <tr>
+          <th>TYPE</th>
+          <th>STATUS</th>
+          <th>TOTAL PRICE</th>
+          <th>TOTAL PRODUCTS</th>
+          <th>DATE</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.transactionType }}</td>
+          <td>{{ transaction.status }}</td>
+          <td>{{ transaction.totalPrice }}</td>
+          <td>{{ transaction.totalProducts }}</td>
+          <td>{{ transaction.createdAt | date : "short" }}</td>
+          <td>
+            <button
+              class="btn btn-success btn-sm"
+              (click)="navigateTOTransactionsDetailsPage(transaction.id)">
+              View Details
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGINATION COMPONENT -->
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
+</div>

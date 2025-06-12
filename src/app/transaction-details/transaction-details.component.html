@@ -1,1 +1,81 @@
-<p>transaction-details works!</p>
+<div class="container py-4">
+  <p *ngIf="message" class="alert alert-info">{{ message }}</p>
+
+  <div *ngIf="transaction">
+
+    <!-- Transaction Information -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">
+        Transaction Information
+      </div>
+      <div class="card-body">
+        <p><strong>Type:</strong> {{ transaction.transactionType }}</p>
+        <p><strong>Status:</strong> {{ transaction.status }}</p>
+        <p><strong>Description:</strong> {{ transaction.description }}</p>
+        <p><strong>Total Products:</strong> {{ transaction.totalProducts }}</p>
+        <p><strong>Total Price:</strong> {{ transaction.totalPrice | currency }}</p>
+        <p><strong>Created At:</strong> {{ transaction.createdAt | date:'short' }}</p>
+        <p *ngIf="transaction.updatedAt"><strong>Updated At:</strong> {{ transaction.updatedAt | date:'short' }}</p>
+      </div>
+    </div>
+
+    <!-- Product Information -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">
+        Product Information
+      </div>
+      <div class="card-body">
+        <p><strong>Name:</strong> {{ transaction.product.name }}</p>
+        <p><strong>SKU:</strong> {{ transaction.product.sku }}</p>
+        <p><strong>Price:</strong> {{ transaction.product.price | currency }}</p>
+        <p><strong>Stock Quantity:</strong> {{ transaction.product.stockQuantity }}</p>
+        <p><strong>Description:</strong> {{ transaction.product.description }}</p>
+        <div *ngIf="transaction.product.imageUrl" class="mt-3">
+          <img [src]="transaction.product.imageUrl" alt="Product Image" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- User Information -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">
+        User Information
+      </div>
+      <div class="card-body">
+        <p><strong>Name:</strong> {{ transaction.user.name }}</p>
+        <p><strong>Email:</strong> {{ transaction.user.email }}</p>
+        <p><strong>Phone Number:</strong> {{ transaction.user.phoneNumber }}</p>
+        <p><strong>Role:</strong> {{ transaction.user.role }}</p>
+      </div>
+    </div>
+
+    <!-- Supplier Information -->
+    <div *ngIf="transaction.supplier" class="card mb-4">
+      <div class="card-header bg-info text-white">
+        Supplier Information
+      </div>
+      <div class="card-body">
+        <p><strong>Name:</strong> {{ transaction.supplier.name }}</p>
+        <p><strong>Address:</strong> {{ transaction.supplier.address }}</p>
+      </div>
+    </div>
+
+    <!-- Update Status -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">
+        Update Status
+      </div>
+      <div class="card-body d-flex align-items-center gap-3 flex-wrap">
+        <label for="status" class="form-label m-0">Status:</label>
+        <select class="form-select w-auto" [(ngModel)]="status" id="status">
+          <option value="PENDING">PENDING</option>
+          <option value="PROCESSING">PROCESSING</option>
+          <option value="COMPLETED">COMPLETED</option>
+          <option value="CANCELED">CANCELED</option>
+        </select>
+        <button class="btn btn-info text-white" (click)="handleUpdateStatus()">Update Status</button>
+      </div>
+    </div>
+
+  </div>
+</div>
