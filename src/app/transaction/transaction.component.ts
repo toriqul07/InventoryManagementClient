@@ -21,7 +21,7 @@ export class TransactionComponent implements OnInit {
   valueToSearch: string = '';
   currentPage: number = 1;
   totalPages: number = 0;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
 
   ngOnInit(): void {
     this.loadTransactions();
